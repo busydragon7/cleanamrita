@@ -1,22 +1,62 @@
 const rules = {
+  // 🥦 Organic & Kitchen Waste
   "apple core": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
   "banana peel": { bin: "green", steps: ["Can be composted.", "Use green bin."] },
   "vegetables": { bin: "green", steps: ["Compost leftover or spoiled vegetables.", "Dispose in green bin."] },
+  "fruit peel": { bin: "green", steps: ["Compost or dispose in green bin."] },
+  "orange": { bin: "green", steps: ["Peels can be composted.", "Dispose in green bin."] },
+  "lemon": { bin: "green", steps: ["Can be composted.", "Dispose in green bin."] },
+  "tea leaves": { bin: "green", steps: ["Can be composted easily.", "Dispose in green bin."] },
+  "egg shell": { bin: "green", steps: ["Crush before composting.", "Dispose in green bin."] },
+  "bread": { bin: "green", steps: ["Compost if stale.", "Dispose in green bin."] },
+  "food waste": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
+  "cooked rice": { bin: "green", steps: ["Put in compost bin or green waste bin."] },
+  "fish bones": { bin: "green", steps: ["Wrap and dispose in green bin."] },
+
+  // 🧴 Plastic & Dry Waste
   "plastic bottle": { bin: "blue", steps: ["Rinse and dry.", "Crush before putting in blue bin."] },
   "milk packet": { bin: "blue", steps: ["Empty, rinse and dry.", "Dispose in blue bin."] },
+  "chips packet": { bin: "blue", steps: ["Clean and dry.", "Dispose in blue bin."] },
+  "plastic cover": { bin: "blue", steps: ["Clean and dry.", "Dispose in blue bin."] },
+  "tiffin box": { bin: "blue", steps: ["Dispose in dry waste (blue bin)."] },
+  "toothbrush": { bin: "blue", steps: ["Dispose in dry waste (blue bin)."] },
+  "plastic cup": { bin: "blue", steps: ["Rinse and dispose in blue bin."] },
+  "plastic spoon": { bin: "blue", steps: ["Dispose in blue bin."] },
+  "juice carton": { bin: "blue", steps: ["Empty and dispose in blue bin."] },
+
+  // 📄 Paper, Metal & Glass
+  "paper": { bin: "blue", steps: ["Keep dry and clean.", "Dispose in blue bin."] },
+  "newspaper": { bin: "blue", steps: ["Fold neatly and dispose in blue bin."] },
+  "cardboard": { bin: "blue", steps: ["Flatten boxes before disposal.", "Dispose in blue bin."] },
+  "metal can": { bin: "blue", steps: ["Rinse and dry.", "Dispose in blue bin."] },
+  "glass bottle": { bin: "blue", steps: ["Rinse; handle carefully.", "Dispose in blue bin."] },
+  "aluminum foil": { bin: "blue", steps: ["Clean if possible.", "Dispose in blue bin."] },
+
+  // ⚡ E-Waste & Hazardous
   "phone": { bin: "black", steps: ["Erase data.", "Drop at e-waste center."] },
   "charger": { bin: "black", steps: ["Bundle wires.", "Drop at e-waste bin."] },
   "battery": { bin: "black", steps: ["Collect separately.", "Drop at e-waste center."] },
-  "paper": { bin: "blue", steps: ["Keep dry and clean.", "Dispose in blue bin."] },
-  "food waste": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
-  "mask": { bin: "black", steps: ["Wrap and dispose in black bin."] },
+  "earphones": { bin: "black", steps: ["Do not mix with household waste.", "Drop in e-waste bin."] },
+  "remote": { bin: "black", steps: ["Remove batteries first.", "Drop in e-waste bin."] },
+  "light bulb": { bin: "black", steps: ["Handle carefully.", "Drop in e-waste bin."] },
+  "tube light": { bin: "black", steps: ["Do not break.", "Drop in e-waste collection point."] },
+  "laptop": { bin: "black", steps: ["Erase all data.", "Dispose at authorized e-waste center."] },
+
+  // 🧹 Hygiene & Others
+  "mask": { bin: "black", steps: ["Wrap securely.", "Dispose in black bin."] },
   "sanitary pad": { bin: "black", steps: ["Wrap securely.", "Dispose in black bin."] },
-  "glass bottle": { bin: "blue", steps: ["Rinse; handle carefully.", "Dispose in blue bin."] },
-  "bread": { bin: "green", steps: ["Compost if stale.", "Dispose in green bin."] },
-  "chips packet": { bin: "blue", steps: ["Clean and dry.", "Dispose in blue bin."] },
-  "toothbrush": { bin: "blue", steps: ["Dispose in dry waste (blue bin)."] },
-  "diaper": { bin: "black", steps: ["Wrap tightly.", "Dispose in black bin."] }
+  "diaper": { bin: "black", steps: ["Wrap tightly.", "Dispose in black bin."] },
+  "old clothes": { bin: "black", steps: ["Donate if reusable.", "Otherwise dispose in black bin."] },
+  "broken glass": { bin: "black", steps: ["Wrap carefully in newspaper.", "Dispose in black bin."] },
+  "shoes": { bin: "black", steps: ["Donate if wearable.", "Dispose in black bin."] },
+  "toothpaste tube": { bin: "black", steps: ["Squeeze out completely.", "Dispose in black bin."] },
+  "old medicines": { bin: "black", steps: ["Return to pharmacy or hazardous waste bin."] }
+
+
+  
+
 };
+
 
 function showSuggestions() {
   const input = document.getElementById("itemInput");
