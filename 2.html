@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteWise - Responsible Waste Disposal</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f2f4f7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2b7a78;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+    input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #2b7a78;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #205d5a;
+    }
+    .result, .spots, .drives {
+      margin-top: 1.5rem;
+    }
+    .steps {
+      background: #def2f1;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .bin {
+      font-weight: bold;
+      margin-top: 1rem;
+      padding: 0.6rem;
+      border-radius: 6px;
+      color: white;
+      text-align: center;
+      width: fit-content;
+    }
+    .bin.blue { background: #0074D9; }
+    .bin.green { background: #2ECC40; }
+    .bin.black { background: #111; }
+    .spot, .drive {
+      background: #feffff;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #666;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WasteWise 🌍</h1>
+    <p>Your one-stop platform for responsible waste disposal</p>
+  </header>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="itemInput" placeholder="Enter any item (e.g. vegetables, plastic bottle, charger)">
+      <button onclick="searchItem()">Search</button>
+    </div>
+    <div id="result" class="result"></div>
+
+    <div class="spots">
+      <h2>Nearby Disposal Spots 🗑️</h2>
+      <div id="spotsList"></div>
+    </div>
+
+    <div class="drives">
+      <h2>Our Clean-Up Drives 💪</h2>
+      <div id="drivesList"></div>
+    </div>
+  </div>
+
+  <footer>© 2025 WasteWise Initiative</footer>
+
+  <script>
+    // ✅ Comprehensive database (A–Z daily items)
+    const rules = {
+      "apple core": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
+      "banana peel": { bin: "green", steps: ["Can be composted.", "Use green bin."] },
+      "vegetables": { bin: "green", steps: ["Compost leftover or spoiled vegetables.", "Dispose in green bin."] },
+      "bread": { bin: "green", steps: ["Compost if stale.", "Dispose in green bin."] },
+      "rice": { bin: "green", steps: ["Leftover rice can go into compost.", "Use green bin."] },
+      "egg shells": { bin: "green", steps: ["Compost them; add to organic waste.", "Use green bin."] },
+      "tea leaves": { bin: "green", steps: ["Use as compost.", "Dispose in green bin."] },
+      "coffee grounds": { bin: "green", steps: ["Mix with compost.", "Use green bin."] },
+      "paper": { bin: "blue", steps: ["Keep dry and clean.", "Dispose in blue bin."] },
+      "newspaper": { bin: "blue", steps: ["Fold neatly.", "Dispose in blue bin."] },
+      "cardboard": { bin: "blue", steps: ["Flatten boxes.", "Keep dry; dispose in blue bin."] },
+      "plastic bottle": { bin: "blue", steps: ["Rinse and dry.", "Crush before putting in blue bin."] },
+      "milk packet": { bin: "blue", steps: ["Empty, rinse and dry.", "Dispose in blue bin."] },
+      "chips packet": { bin: "blue", steps: ["Clean and dry.", "Dispose in blue bin."] },
+      "aluminium can": { bin: "blue", steps: ["Rinse can.", "Dispose in blue bin."] },
+      "glass bottle": { bin: "blue", steps: ["Rinse; handle carefully.", "Dispose in blue bin."] },
+      "broken glass": { bin: "black", steps: ["Wrap in newspaper.", "Dispose in black bin for safety."] },
+      "medicine": { bin: "black", steps: ["Return to pharmacy.", "Do not flush or throw in normal bin."] },
+      "expired medicine": { bin: "black", steps: ["Return to pharmacy or collection point.", "Do not throw in trash."] },
+      "mobile phone": { bin: "black", steps: ["Erase data and remove SIM.", "Drop at e-waste center."] },
+      "charger": { bin: "black", steps: ["Bundle wires.", "Drop at e-waste bin."] },
+      "laptop": { bin: "black", steps: ["Wipe data and remove battery.", "Drop at e-waste center."] },
+      "television": { bin: "black", steps: ["Do not dismantle.", "Drop at e-waste facility."] },
+      "battery": { bin: "black", steps: ["Collect separately.", "Drop at hazardous/e-waste center."] },
+      "toothpaste tube": { bin: "blue", steps: ["Empty and rinse.", "Dispose in blue bin."] },
+      "toothbrush": { bin: "blue", steps: ["Dispose in dry waste (blue bin)."] },
+      "mask": { bin: "black", steps: ["Wrap and dispose in black bin."] },
+      "sanitary pad": { bin: "black", steps: ["Wrap securely.", "Dispose in black bin."] },
+      "diaper": { bin: "black", steps: ["Wrap tightly.", "Dispose in black bin."] },
+      "cloth": { bin: "blue", steps: ["If reusable, donate.", "Otherwise, dispose in blue bin."] },
+      "metal can": { bin: "blue", steps: ["Rinse and dry.", "Dispose in blue bin."] },
+      "straw": { bin: "blue", steps: ["Dispose in blue bin (dry waste)."] },
+      "plastic spoon": { bin: "blue", steps: ["Dispose in blue bin."] },
+      "plastic bag": { bin: "blue", steps: ["Reuse if possible.", "Dispose in blue bin."] },
+      "food waste": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
+      "leftover food": { bin: "green", steps: ["Compost or green bin."] },
+      "vegetable peels": { bin: "green", steps: ["Compost or green bin."] },
+      "bread wrapper": { bin: "blue", steps: ["Clean and dry before disposing in blue bin."] }
+    };
+
+    // ✅ Fuzzy search for partial matches
+    function searchItem() {
+      const query = document.getElementById("itemInput").value.trim().toLowerCase();
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+
+      if (!query) {
+        resultDiv.innerHTML = "<p>Type an item name to search.</p>";
+        return;
+      }
+
+      // Find best matches
+      const matches = Object.keys(rules).filter(item => item.includes(query));
+      if (matches.length > 0) {
+        let output = "";
+        matches.forEach(match => {
+          const { bin, steps } = rules[match];
+          const colorNames = { blue: "Blue Bin (Dry Waste)", green: "Green Bin (Wet Waste)", black: "Black Bin (Hazardous/E-waste)" };
+          output += `
+            <h2>${match.charAt(0).toUpperCase() + match.slice(1)}</h2>
+            <ul class="steps">${steps.map(s => `<li>${s}</li>`).join("")}</ul>
+            <div class="bin ${bin}">${colorNames[bin]}</div>
+            <hr/>
+          `;
+        });
+        resultDiv.innerHTML = output;
+      } else {
+        resultDiv.innerHTML = `<p>⚠️ Sorry, no disposal info found for "${query}". Try general words like <b>food, plastic, bottle, phone</b>.</p>`;
+      }
+    }
+
+    // ✅ Example disposal spots
+    const spots = [
+      { name: "Campus E-Waste Bin", type: "E-Waste", location: "Block A near Library" },
+      { name: "Plastic Recycling Bin", type: "Plastic", location: "Cafeteria Entrance" },
+      { name: "Organic Compost Pit", type: "Food Waste", location: "Behind Hostel Block" }
+    ];
+    const drives = [
+      { title: "Beach Clean-Up Drive", date: "Nov 10, 2025", location: "Marina Beach", desc: "Join us to collect plastic waste from the coastline!" },
+      { title: "Campus E-Waste Collection Week", date: "Dec 2-6, 2025", location: "College Ground", desc: "Deposit old electronics responsibly!" }
+    ];
+
+    const spotsList = document.getElementById("spotsList");
+    const drivesList = document.getElementById("drivesList");
+    spots.forEach(s => spotsList.innerHTML += `<div class="spot"><b>${s.name}</b><br>Type: ${s.type}<br>Location: ${s.location}</div>`);
+    drives.forEach(d => drivesList.innerHTML += `<div class="drive"><b>${d.title}</b><br>Date: ${d.date}<br>Location: ${d.location}<br>${d.desc}</div>`);
+  </script>
+</body>
+</html>

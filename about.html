@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - WasteWise</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #f4fff7, #dff8f0);
+      font-family: "Poppins", sans-serif;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #2b7a78;
+      margin-bottom: 0.5rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .team-photo {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .team-photo:hover {
+      transform: scale(1.03);
+    }
+
+    h2 {
+      color: #205d5a;
+      margin-top: 1.5rem;
+      border-left: 5px solid #3caea3;
+      padding-left: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    ul li {
+      background: #e8f9f2;
+      margin: 0.4rem 0;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    p {
+      line-height: 1.7;
+      margin-top: 0.5rem;
+    }
+
+    .back-btn {
+      background: linear-gradient(135deg, #2b7a78, #205d5a);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-top: 2rem;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #205d5a, #3caea3);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Our Project 🌿</h1>
+    <p>Learn more about the people and purpose behind WasteWise</p>
+  </header>
+
+  <div class="container">
+    <img src="images/gp photo.jpeg" alt="Our Team" class="team-photo">
+
+    <h2>👥 Group Members & Roll Numbers</h2>
+    <ul>
+      <li>1. BYN Siddharth Sai - AM.SC.U4CSE25209</li>
+      <li>2. B Manoj Kumar - AM.SC.U4CSE25210</li>
+      <li>3. Gowtham Aditya V - AM.EN.U4CSE003</li>
+      <li>4. Jayanth A - AM.EN.U4CSE004</li>
+      <li>5. Abhilash - AM.EN.U4CSE005</li>
+    </ul>
+
+    <h2>📘 Introduction</h2>
+    <p>
+      Our project, <strong>WasteWise</strong>, aims to create an interactive platform for promoting responsible waste disposal. We wanted to make waste management more accessible, informative, and engaging for everyone in our community.
+    </p>
+
+    <h2>💡 Why We Selected This Topic</h2>
+    <p>
+      Waste management is one of the biggest environmental challenges faced by modern cities. We noticed that people often don’t know how to properly dispose of everyday items — from batteries to electronics. This inspired us to build a digital guide that helps people make eco-friendly choices easily.
+    </p>
+
+    <h2>🎯 Outcome of the Project</h2>
+    <p>
+      The outcome is a fully functional website that allows users to search for any household or electronic item and instantly see the proper disposal method based on local rules. It also includes information about clean-up drives organized by our team.
+    </p>
+
+    <h2>❤️ Compassion Gained</h2>
+    <p>
+      This project taught us empathy toward the environment and respect for community-driven change. We learned how small actions — like recycling and proper segregation — create a collective impact on sustainability.
+    </p>
+
+    <h2>🏁 Results</h2>
+    <p>
+      Our initiative successfully spread awareness among students and locals. Many participants joined our clean-up drives, and our website became a go-to tool for quick waste disposal guidance.
+    </p>
+
+    <h2>📖 Lessons Learned</h2>
+    <p>
+      We realized the importance of teamwork, responsibility, and consistent communication. Technically, we improved our web development and data handling skills. Personally, we learned that positive environmental change starts with awareness.
+    </p>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">← Back to Home</button>
+  </div>
+
+  <footer>© 2025 WasteWise Initiative | All Rights Reserved</footer>
+</body>
+</html>

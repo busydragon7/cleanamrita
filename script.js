@@ -1,0 +1,132 @@
+const rules = {
+  "apple core": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
+  "banana peel": { bin: "green", steps: ["Can be composted.", "Use green bin."] },
+  "vegetables": { bin: "green", steps: ["Compost leftover or spoiled vegetables.", "Dispose in green bin."] },
+  "plastic bottle": { bin: "blue", steps: ["Rinse and dry.", "Crush before putting in blue bin."] },
+  "milk packet": { bin: "blue", steps: ["Empty, rinse and dry.", "Dispose in blue bin."] },
+  "phone": { bin: "black", steps: ["Erase data.", "Drop at e-waste center."] },
+  "charger": { bin: "black", steps: ["Bundle wires.", "Drop at e-waste bin."] },
+  "battery": { bin: "black", steps: ["Collect separately.", "Drop at e-waste center."] },
+  "paper": { bin: "blue", steps: ["Keep dry and clean.", "Dispose in blue bin."] },
+  "food waste": { bin: "green", steps: ["Compost if possible.", "Dispose in green bin."] },
+  "mask": { bin: "black", steps: ["Wrap and dispose in black bin."] },
+  "sanitary pad": { bin: "black", steps: ["Wrap securely.", "Dispose in black bin."] },
+  "glass bottle": { bin: "blue", steps: ["Rinse; handle carefully.", "Dispose in blue bin."] },
+  "bread": { bin: "green", steps: ["Compost if stale.", "Dispose in green bin."] },
+  "chips packet": { bin: "blue", steps: ["Clean and dry.", "Dispose in blue bin."] },
+  "toothbrush": { bin: "blue", steps: ["Dispose in dry waste (blue bin)."] },
+  "diaper": { bin: "black", steps: ["Wrap tightly.", "Dispose in black bin."] }
+};
+
+function showSuggestions() {
+  const input = document.getElementById("itemInput");
+  const suggestionsDiv = document.getElementById("suggestions");
+  const query = input.value.trim().toLowerCase();
+
+  if (!query) {
+    suggestionsDiv.style.display = "none";
+    return;
+  }
+
+  const matches = Object.keys(rules).filter(item => item.includes(query));
+  if (matches.length > 0) {
+    suggestionsDiv.innerHTML = matches.map(m => `<div onclick="selectSuggestion('${m}')">${m}</div>`).join("");
+    suggestionsDiv.style.display = "block";
+  } else {
+    suggestionsDiv.style.display = "none";
+  }
+}
+
+function selectSuggestion(item) {
+  document.getElementById("itemInput").value = item;
+  document.getElementById("suggestions").style.display = "none";
+  searchItem();
+}
+
+function checkEnter(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchItem();
+  }
+}
+
+function searchItem() {
+  const query = document.getElementById("itemInput").value.trim().toLowerCase();
+  const resultDiv = document.getElementById("result");
+  const loader = document.getElementById("loader");
+  const suggestionsDiv = document.getElementById("suggestions");
+  suggestionsDiv.style.display = "none";
+
+  resultDiv.innerHTML = "";
+  loader.style.display = "block";
+
+  setTimeout(() => {
+    loader.style.display = "none";
+    if (!query) {
+      resultDiv.innerHTML = "<p>Type an item name to search.</p>";
+      return;
+    }
+
+    const matches = Object.keys(rules).filter(item => item.includes(query));
+    if (matches.length > 0) {
+      let output = "";
+      matches.forEach(match => {
+        const { bin, steps } = rules[match];
+        const colorNames = {
+          blue: "Blue Bin (Dry Waste)",
+          green: "Green Bin (Wet Waste)",
+          black: "Black Bin (Hazardous/E-waste)"
+        };
+        output += `
+          <h2>${match.charAt(0).toUpperCase() + match.slice(1)}</h2>
+          <ul class="steps">${steps.map(s => `<li>${s}</li>`).join("")}</ul>
+          <div class="bin ${bin}">${colorNames[bin]}</div>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.3);"/>
+        `;
+      });
+      resultDiv.innerHTML = output;
+    } else {
+      resultDiv.innerHTML = `<p>⚠️ No info found for "${query}". Try general words like <b>food, plastic, battery</b>.</p>`;
+    }
+  }, 700);
+}
+
+const spots = [
+  { name: "E-Waste", type: "Electronic", location: "N 005" },
+  { name: "Mixed", type: "General", location: "S 004B" },
+  { name: "wet Waste", type: "Organic", location: "S 009B" },
+  { name: "Mixed", type: "General", location: "near shreyas lab" },
+  { name: "e-waste", type: "Electronic", location: "N 012A" },
+  { name: "Plastic", type: "Recyclable", location: "1st floor Academic Block" },
+  { name: "E-Waste", type: "Electronic", location: "ICTS 1st floor" },
+  { name: "Mixed", type: "General", location: "Deprtment of English 1st floor" },
+  { name: "E-Waste", type: "Electronic", location: "Hardware Lab 1st floor" },
+  { name: "E-Waste", type: "Electronic", location: "1st floor Restroom" },
+  { name: "Mixed", type: "General", location: "1st floor N 104" },
+  { name: "plastic", type: "Recyclable", location: "1st floor Mens Restroom" },
+  { name: "E-Waste", type: "Electronic", location: "N 110" },
+  { name: "E-Waste", type: "Electronic", location: "1st floor near stairs" },
+  { name: "Wet Waste", type: "Organic", location: "2nd Floor north Hallway" },
+  { name: "Wet Waste", type: "Organic", location: "2nd Mens Restroom" },
+  { name: "E waste", type: "Electronic", location: "Amba Seminar Hall" },
+  { name: "e-Waste", type: "Electronic", location: "S 204G computing centre" },
+  { name: "wet Waste", type: "Organic", location: "S 209-A" },
+  { name: "wet Waste", type: "Organic", location: "Mens Restroom 2nd Floor" },
+  { name: "Wet Waste", type: "Organic", location: "N 303" },
+  { name: "E-Waste", type: "Electronic", location: "N 303E" },
+  { name: "Mixed", type: "General", location: "3nd floor near steps" },
+  { name: "Wet Waste", type: "Organic", location: "N 309D" },
+  { name: "MIxed", type: "General", location: "N 303A" },
+  { name: "Plastic", type: "Recyclable", location: "S 303" },
+  { name: "Wet Waste", type: "Organic", location: "Behind Hostel Block" },
+];
+
+const drives = [
+  { title: "Beach Clean-Up Drive", date: "Nov 10, 2025", location: "Marina Beach", desc: "Join us to collect plastic waste from the coastline!" },
+  { title: "Campus E-Waste Week", date: "Dec 2-6, 2025", location: "College Ground", desc: "Deposit old electronics responsibly!" }
+];
+
+const spotsList = document.getElementById("spotsList");
+const drivesList = document.getElementById("drivesList");
+spots.forEach(s => spotsList.innerHTML += `<div class="spot"><b>${s.name}</b><br>Type: ${s.type}<br>📍 ${s.location}</div>`);
+drives.forEach(d => drivesList.innerHTML += `<div class="drive"><b>${d.title}</b><br>📅 ${d.date}<br>📍 ${d.location}<br>${d.desc}</div>`);

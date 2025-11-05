@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteWise - Responsible Waste Disposal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🌍 WasteWise</h1>
+    <p>Your one-stop platform for responsible waste disposal</p>
+  </header>
+
+  <!-- Top Navigation Buttons -->
+  <div class="top-buttons">
+    <button onclick="window.location.href='about.html'" class="nav-btn">About Our Project</button>
+    <button onclick="window.location.href='drives.html'" class="nav-btn">Clean-Up Drives</button>
+  </div>
+
+
+  <div class="container">
+    <div class="search-box">
+      <input
+        type="text"
+        id="itemInput"
+        placeholder="Type an item (e.g. vegetables, plastic bottle, charger)"
+        oninput="showSuggestions()"
+        onkeydown="checkEnter(event)"
+      />
+      <button onclick="searchItem()">Search</button>
+      <div id="suggestions" class="suggestions" style="display:none;"></div>
+    </div>
+
+    <div class="loader" id="loader"></div>
+    <div id="result" class="result"></div>
+
+    <h2 style="margin-top:2rem;">Nearby Disposal Spots 🗑️</h2>
+    <div id="spotsList"></div>
+
+    <div style="text-align:center; margin-top:1rem;">
+      <button onclick="window.location.href='about.html'" class="drive-btn">About Our Project</button>
+    </div>
+
+
+    <h2 style="margin-top:2rem;">Clean-Up Drives Conducted by Us 💪</h2>
+    <div style="text-align:center; margin-top: 1rem;">
+      <button onclick="window.location.href='drives.html'" class="drive-btn">View Clean-Up Drives</button>
+    </div>
+
+  </div>
+
+  <footer>© 2025 WasteWise Initiative</footer>
+  <script src="script.js"></script>
+</body>
+</html>

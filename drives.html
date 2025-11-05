@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clean-Up Drives - WasteWise</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .back-btn {
+      background: linear-gradient(135deg, #2b7a78, #205d5a);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-bottom: 1rem;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #205d5a, #3caea3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💪 Our Clean-Up Drives</h1>
+    <p>See how we’re making a difference!</p>
+  </header>
+
+  <div class="container">
+    <button class="back-btn" onclick="window.location.href='index.html'">← Back to Home</button>
+
+    <div class="gallery">
+      <!-- Replace these sample image paths with your actual photo filenames -->
+      <img src="images/CD/1.jpeg" alt="Clean-up Drive 1">
+      <img src="images/CD/2.jpeg" alt="Clean-up Drive 2">
+      <img src="images/CD/3.jpeg" alt="Clean-up Drive 3">
+      <img src="images/CD/4.jpeg" alt="Clean-up Drive 4">
+      <img src="images/CD/5.jpeg" alt="Clean-up Drive 5">
+      <img src="images/CD/6.jpeg" alt="Clean-up Drive 6">
+      <img src="images/CD/7.jpeg" alt="Clean-up Drive 7">
+      <img src="images/CD/8.jpeg" alt="Clean-up Drive 8">
+      <img src="images/CD/9.jpeg" alt="Clean-up Drive 9">
+    </div>
+  </div>
+
+  <footer>© 2025 WasteWise Initiative</footer>
+</body>
+</html>
